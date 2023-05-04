@@ -1,0 +1,161 @@
+{% extends "sitepizza/template.html" %}
+
+
+{% block static %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="divisao" id="com-selo">
+            <div id="acessorio">
+            <div id="selo-e-texto">
+                {% load static %}
+                <img class="selo" src="{% static 'media/media/selo.png' %}" >
+                <div id="texto-do-selo">
+                <h1 class="caminho">Menu</h1>
+                </div>
+                </div>
+                </div>
+
+<br><br>
+
+
+                <div class="row">
+                    <h2>Pizzas</h2>
+                    {% for pizza in pizzas %}
+
+                    <form action="{% url 'navegar:add_carrinho' %}" method="post">
+                        {% csrf_token %}
+                    <div class="row mb-5">
+                        <div class="col-4 my-auto">
+                            <div class="product-view">
+                                <input type="hidden" name="produto" value="{{pizza.id}}">
+                                <h3>{{pizza.nome}}</h3>
+                                <h4>{{pizza.descricao}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-4 text-center my-auto">
+                            <div class="quantidade text-center">
+                                <label for="quantidade">Qtd:</label>
+                                <input type="number" style="width:15%"  id="quantidade" name="quantidade" min="1" value="1">
+                                </select>
+                            </div>
+
+
+                            <br>
+
+
+                            <div class="adicionar ao carrinho">
+                                <h4><input class="botao" type="submit" value="Pedir" ></h4>
+                                </div>
+                                </form>
+
+                        </div>
+
+
+                        <div class="col-4 text-center ">
+                            <div class="div-img-menu">
+                            <img class="imagens-menu" src="{{ pizza.image.url }}">
+                                <h3 id="preco-pizza">{{ pizza.preco }}€</h3>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="row">
+
+                    <h2>Acompanhamentos</h2>
+
+                    {% for acompanhamento in acompanhamentos %}
+
+
+                    <div class="col-4 text-center">
+                        <form id="form-acompanhamento" action="{% url 'navegar:add_carrinho' %}" id="form-id" method="post">
+                            {% csrf_token %}
+                            <div class="div-img-menu">
+                            <img class="imagens-menu" src="{{ acompanhamento.image.url }}">
+                                <h3 id="preco-pizza">{{ acompanhamento.preco }}€</h3>
+                            </div>
+                            <br>
+                        <input type="hidden" name="produto" value="{{acompanhamento.id}}">
+                        <h3>{{acompanhamento.nome}}</h3>
+
+                        <h4><label for="quantidade">Qtd:</label>
+                        <input type="number" style="width:15%"  id="quantidade" name="quantidade" min="1" value="1">
+                            <a class="plus" href="#" onclick="document.forms['form-acompanhamento'].submit(); "></a></h4>
+                        </form>
+
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="row">
+                    <h2>Bebidas</h2>
+                    {% for bebida in bebidas %}
+
+
+                    <div class="col-3 text-center">
+                        <form id="form-bebida" action="{% url 'navegar:add_carrinho' %}" id="form-id" method="post">
+                            {% csrf_token %}
+                            <div class="div-img-menu">
+                            <img class="imagens-menu" src="{{ bebida.image.url }}">
+                                <h3 id="preco-pizza">{{ bebida.preco }}€</h3>
+                            </div>
+                            <br>
+                        <input type="hidden" name="produto" value="{{bebida.id}}">
+                        <h3>{{bebida.nome}}</h3>
+
+                        <h4><label for="quantidade">Qtd:</label>
+                        <input type="number" style="width:15%"  id="quantidade" name="quantidade" min="1" value="1">
+                            <a class="plus" href="#" onclick="document.forms['form-bebida'].submit(); "></a></h4>
+                        </form>
+
+                    </div>
+                    {% endfor %}
+                    </div>
+
+
+
+
+
+                <br>
+                <div class="row">
+                    <h2>Sobremesas</h2>
+                    {% for sobremesa in sobremesas %}
+
+                    <div class="col-3 text-center">
+                        <form id="form-sobremesa" action="{% url 'navegar:add_carrinho' %}" id="form-id" method="post">
+                            {% csrf_token %}
+                            <div class="div-img-menu">
+                            <img class="imagens-menu" src="{{ sobremesa.image.url }}">
+                                <h3 id="preco-pizza">{{ sobremesa.preco }}€</h3>
+                            </div>
+
+                            <br>
+                        <input type="hidden" name="produto" value="{{sobremesa.id}}">
+                        <h3>{{sobremesa.nome}}</h3>
+
+                        <h4><label for="quantidade">Qtd:</label>
+                        <input type="number" style="width:15%"  id="quantidade" name="quantidade" min="1" value="1">
+                            <a class="plus" href="#" onclick="document.forms['form-sobremesa'].submit(); "></a></h4>
+                        </form>
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+

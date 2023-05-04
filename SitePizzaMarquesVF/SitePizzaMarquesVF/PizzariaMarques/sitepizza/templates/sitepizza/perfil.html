@@ -1,0 +1,61 @@
+{% extends "sitepizza/template.html" %}
+
+
+{% block static %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="divisao" id="com-selo">
+
+                <div id="acessorio">
+                    <div id="selo-e-texto">
+                        {% load static %}
+                        <img class="selo" src="{% static 'media/media/selo.png' %}" >
+                        <div id="texto-do-selo">
+                        <h1 class="caminho">Perfil</h1>
+                        </div>
+                    </div>
+                </div>
+
+
+<br>
+
+                    <div class="text-center">
+
+                        <div class="cartao-perfil text-center">
+                            {% if perfil.image %}
+
+                            {% load static %}
+                            <img class="imagens-menu" src="{{ perfil.image.url }}" alt="" width="200" height="200">
+                            {% else %}
+
+                            <img class="imagens-menu" src="{% static 'media/media/default-profile.png' %}" width="200" height="200" alt="">
+                            {% endif %}
+
+                            <form method="post" enctype="multipart/form-data" action="{% url 'navegar:fazer_upload' %}">
+                            {% csrf_token %}
+                                <br>
+
+                            <input class="mb-2" style="position: relative; left: 118px;" type="file" name="myfile"><br>
+                            <input type="submit" value="Upload">
+                            </form>
+                            <br> <br>
+                            <h1 style="">Olá, {{ request.user }}.</h1>
+                            <br>
+                            <h3><strong>Morada:</strong> {{ perfil.morada }}</h3>
+                            <br>
+                            <h3><strong>Telemóvel:</strong> {{ perfil.telemovel }}</h3>
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

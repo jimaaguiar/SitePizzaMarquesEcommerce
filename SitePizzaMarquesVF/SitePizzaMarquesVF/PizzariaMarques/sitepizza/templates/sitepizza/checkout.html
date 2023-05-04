@@ -1,0 +1,184 @@
+{% extends "sitepizza/home.html" %}
+
+{% block static %}
+
+
+<div class="container">
+    <div class="row" >
+
+
+        <div class="col-lg-6 col-md-12 mb-2" >
+
+
+            <div class="divisao" id="com-selo">
+                <form id="form-checkout" action="{% url 'navegar:finalizar' %}" id="form-id" method="post">
+                    {% csrf_token %}
+
+                <div id="acessorio">
+                    <div id="selo-e-texto">
+
+                    {% load static %}
+                    <img class="selo" src="{% static 'media/media/selo.png' %}" >
+                        <div id="texto-do-selo">
+                        <h1 class="caminho">Checkout</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="dotteddiv">
+                <h2>Método de Envio</h2>
+                <input type="radio" id="domicilio" name="entrega" value="Entrega em casa" >
+                <label for="domicilio" ><h4>Entrega em casa</h4></label>
+
+                <div id="recolharestaurante" style="float: right;">
+                    <input type="radio" id="recolha" name="entrega" value="Recolha no restaurante">
+                    <label for="recolha"><h4>Recolha no restaurante</h4></label>
+                </div>
+                </div>
+
+<br><br>
+
+                <div class="dotteddiv">
+
+                <h2>Detalhes de entrega</h2>
+
+                <input type="radio" id="moradaP" name="morada" value="{{ perfil.morada }}" onclick="hideBox('hideFields'); openBox('moradaregistada');">
+                <label for="moradaP"><h4>Morada registada</h4></label>
+                    <div class="hide" id="moradaregistada">
+                       <h4> {{ perfil.morada }}</h4>
+
+                    </div>
+
+                <br> <br>
+
+                <input type="radio" id="moradaS" name="morada" value="morada2" onclick="hideBox('moradaregistada'); openBox('hideFields'); ">
+                <label for="moradaS"><h4>Outra morada</h4></label>
+                <div class="hide" id="hideFields">
+                    <input style="width:60%" type="text" id="moradaR" name="morada-nova"  placeholder="Ex: Rua da Rosa nº2 1ºEsq." size="60">
+                    <br><br>
+
+                </div>
+
+
+
+                </div>
+
+
+
+
+<br><br>
+
+
+
+                <div class="dotteddiv">
+                <h2>
+                Método de Pagamento
+                 </h2>
+                <br>
+
+                <input type="radio" id="dinheiro" name="pagamento" value ="Dinheiro">
+                <label for="dinheiro"><h4>Dinheiro <i class="far fa-money-bill-alt"></i></h4></label>
+
+                <br><br>
+
+                <input type="radio" id="cartao" name="pagamento" value="Cartao" onclick="hideBox('hide')" >
+                <label for="cartao"><h4>Cartão <i class="far fa-credit-card"></i></h4></label><br><br>
+
+                <input type="radio" id="mbWay" name="pagamento" value="Mbway" onclick="hideBox('hide')">
+                <label for="mbWay"><h4>MbWay <i class="fas fa-mobile"></i></h4></label>
+                </div>
+                    <input type="hidden" name="subtotal" value="{{ pedido.subtotal }}">
+                </form>
+                </div>
+
+        </div>
+
+
+
+
+
+        <div class="col-lg-6 col-md-12 mb-2">
+
+                    <div class="divisao">
+                            <h2>Carrinho</h2>
+                            {% for produto_pedido in produtos_pedido %}
+
+
+                        <form action="{% url 'navegar:remove_do_carrinho' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="row mb-5 dotteddiv">
+
+
+                            <div class="col-3 my-auto">
+                                <div>
+                                <input type="hidden" name="produtopizza" value="{{ produto_pedido.produto.id }}">
+                                <h3>{{ produto_pedido.produto }}</h3>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-3 my-auto text-center">
+                                <div class="mb-3">
+                                <h4>{{ produto_pedido.quantidade }}</h4>
+                                </div>
+
+                            <div class="remover do carrinho">
+                                <h4><input class="botao" type="submit" value="Remover" ></h4>
+                                </div>
+                                </form>
+
+                            </div>
+
+                             <div class="col-3 my-auto text-center">
+                                 <h4>{{ produto_pedido.precoprodutos }}€</h4>
+                                 </div>
+
+                            <div class="col-3">
+                                <div>
+                                <img class="imagens-menu" src="{{ produto_pedido.produto.image.url }}">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        {% endfor %}
+
+                        <div class="row mb-5 dotteddiv text-end">
+                            <div class="col-4 offset-8">
+                                <h2>Sub-total: <br> {{ pedido.subtotal }}€</h2>
+                                <div class="remover do carrinho">
+                                <h4><a class="botao" id="finalizarlink" href="#" onclick="document.forms['form-checkout'].submit(); " alt="Broken Link">Finalizar <i class="fas fa-truck"></i></a></h4>
+                                </div>
+
+                            </div>
+
+
+
+                    </div>
+
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+<script>
+                function openBox(x) {
+                  document.getElementById(x).style.display = "block";
+                }
+
+
+                function hideBox(x) {
+                  document.getElementById(x).style.display = "none";
+                }
+
+
+
+            </script>
+
+{% endblock %}

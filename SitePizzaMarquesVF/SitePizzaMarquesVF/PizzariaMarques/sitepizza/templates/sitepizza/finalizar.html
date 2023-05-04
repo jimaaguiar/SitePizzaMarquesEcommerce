@@ -1,0 +1,30 @@
+{% extends "sitepizza/template.html" %}
+{% block static %}
+
+
+<div class="container">
+<div class="row">
+<div class="col-4 offset-4 text-center">
+
+    	<div class="divisao text-center">
+            <div class="row">
+            <h2>Pedido Finalizado</h2>
+            <h3>A sua comida está a caminho, {{ request.user }}!</h3>
+		</div>
+
+            <div class="row text-center">
+            <strong>Detalhes de Pedido:</strong><br>
+                NºPedido: {{checkout.pedido.id}}<br>
+                Método de Entrega: {{ checkout.metEntrega }}<br>
+                Método de Pagamento: {{ checkout.metPagamento }}<br>
+                Morada: {{ checkout.morada }}<br>
+                Valor Total: {{ pedido.valorPedido }}€
+
+
+            </div>
+        </div>
+	</div>
+    </div>
+</div>
+
+{% endblock %}

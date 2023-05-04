@@ -1,0 +1,79 @@
+
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: url("/static/media/media/background.jpeg");
+
+		}
+
+		.user_card {
+			width: 350px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: url("/static/media/media/papiro.jpg");
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			border-radius: 25px;
+			box-shadow: 0 0 2em black;
+		}
+
+		.form_container {
+			margin-top: 20px;
+		}
+
+		#form-title{
+			font: bold 18pt Lucida Handwriting;
+
+		}
+		.login_btn {
+    		text-decoration: none;
+    		background-color: #8B0000;
+    		color: white;
+   		 	padding: 5px;
+   	 		transition: background-color 0.2s;
+		}
+		.login_btn:hover {
+    		background-color: #888888;
+    		color: white;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: none;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-append{
+			height:39px
+
+
+		}
+		.input-group-append{
+			height:38px
+			width: 39px;
+		}
+		.input-group-text {
+			background: #8B0000 !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+
+
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+{% extends "sitepizza/template.html" %}
+
+{% block static %}
+
+<!---------------------------------------------------------------Galeria----------------------------------------------->
+<div class="container">
+<div class="row">
+<div class="col-lg-8 col-md-12 mb-3 ">
+
+<div id="carouselExampleIndicators" class="carousel slide imagens-menu" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+      {% load static %}
+    <div class="carousel-item active ">
+      <img src="{% static 'media/media/banner-pizza-2.jpg' %}" width="630" height="425" class="d-block w-100 " alt="...">
+    </div>
+    <div class="carousel-item ">
+      <img src="{% static 'media/media/banner-desconto.jpg' %}" width="630" height="425" class="d-block w-100 " alt="...">
+    </div>
+    <div class="carousel-item ">
+      <img src="{% static 'media/media/banner-pizza-3.jpg' %}" width="630" height="425" class="d-block w-100 image-fluid" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+  </div>
+<div class="col-lg-4 col-md-12 mb-3 ">
+    <div class="divisao text-center">
+
+      {% if user.is_authenticated %}
+      {% if perfil.image %}
+
+      {% load static %}
+      <img class="imagens-menu" src="{{ perfil.image.url }}" alt="" width="180" height="180">
+      {% else %}
+
+      <img class="imagens-menu" src="{% static 'media/media/default-profile.png' %}" width="180" height="180" alt="">
+      {% endif %}
+      <br><br>
+      <strong style="font-size: 1.5em;"> Bem-vindo, {{ request.user }}!</strong>
+
+      {% else %}
+      <div class="row mb-5">
+      <a class="botao" id="finalizarlink" href="{% url 'navegar:login' %}" >Login</a>
+      </div>
+      <div class="row">
+       <strong>Ainda não tens conta ?</strong>
+      <a class="botao" id="finalizarlink" href="{% url 'navegar:registo' %}" >Regista-te</a>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+
+          <div class="divisao text-center">
+      <div style="font-size:20px;" class="row mb-3" >
+      <strong>Venha Conhecer-nos</strong>
+        </div>
+
+    <div class="row" >
+    <div class="imagens-menu" id="map"></div>
+    </div>
+    </div>
+
+  </div>
+  </div>
+  </div>
+
+
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const uluru = { lat: 38.694915380179545, lng: -9.328088945081003 };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+      }
+    </script>
+
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFLjYRtD909cCDxT6nnd_AXEJhUHH9zTw&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+{% endblock %}
+
+
